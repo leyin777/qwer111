@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/reactdemo.iml" filepath="$PROJECT_DIR$/reactdemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/pqback.iml" filepath="$PROJECT_DIR$/.idea/pqback.iml" />
     </modules>
   </component>
 </project>
