@@ -11,9 +11,9 @@
         </el-form-item>
         <el-form-item label="身份" prop="role">
           <el-select v-model="loginForm.role" placeholder="请选择身份">
-            <el-option label="管理者" value="admin" />
+            <el-option label="学生" value="audience" />
+            <el-option label="组织者" value="organizer" />
             <el-option label="演讲者" value="speaker" />
-            <el-option label="学生" value="student" />
           </el-select>
         </el-form-item>
         <el-form-item>
@@ -60,7 +60,7 @@ const handleLogin = () => {
           router.push('/admin')
         } else if (res.data.data.role === 'speaker') {
           router.push('/courses')
-        } else if (res.data.data.role === 'student') {
+        } else if (res.data.data.role === 'audience') {
           router.push('/student')
         }
       } else {
