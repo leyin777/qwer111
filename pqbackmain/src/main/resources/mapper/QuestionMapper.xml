@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.QuestionMapper">
+    <select id="getQuestionsByQid" parameterType="long" resultType="com.example.entity.Question">
+        SELECT id, qid, content, option_a, option_b, option_c, option_d, correct_index
+        FROM question
+        WHERE qid = #{qid}
+    </select>
+
+    <insert id="saveAnswerRecord">
+        INSERT INTO answer_record(user_id, qid, question_id, user_answer_index, correct)
+        VALUES(#{userId}, #{qid}, #{record.questionId}, #{record.userAnswerIndex}, #{record.correct})
+    </insert>
+
+    <select id="countCorrectAnswers" resultType="int">
+        SELECT COUNT(*) FROM answer_record
+        WHERE user_id = #{userId} AND qid = #{qid} AND correct = 1
+    </select>
+
+    <select id="countTotalAnswers" resultType="int">
+        SELECT COUNT(*) FROM answer_record
+        WHERE user_id = #{userId} AND qid = #{qid}
+    </select>
+</mapper> 
