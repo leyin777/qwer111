@@ -1,15 +1,27 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Login from '../Login.vue'
-import Register from '../Register.vue'
+import Login from '../views/Login.vue'
+import Register from '../views/Register.vue'
+import CourseList from '@/views/CourseList.vue'
+
+// 其他页面组件也要用 ../views/xxx.vue 路径引入
 
 const routes = [
-  { path: '/', component: Login },
-  { path: '/register', component: Register }
+  { path: '/', redirect: '/login' },
+  { path: '/login', component: Login },
+  { path: '/register', component: Register },
+  { path: '/courses', component: CourseList },
+
+  // 下面是三个身份页面的路由示例
+  { path: '/admin', component: () => import('../views/Admin.vue') },
+  { path: '/student', component: () => import('../views/Student.vue') },
+  { path: '/courses', component: () => import('../views/CourseList.vue') },
+  { path: '/add-course', component: () => import('../views/AddCourse.vue') }
 ]
 
 const router = createRouter({
   history: createWebHistory(),
   routes
 })
+
 
 export default router

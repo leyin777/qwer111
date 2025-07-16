@@ -18,7 +18,7 @@
         <label for="role">身份</label>
         <select id="role" v-model="role" required>
           <option value="" disabled>请选择身份</option>
-          <option value="user">听众</option>
+          <option value="user">学生</option>
           <option value="admin">组织者</option>
           <option value="admin">演讲者</option>
         </select>

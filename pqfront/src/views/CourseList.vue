@@ -1,0 +1,63 @@
+<template>
+  <div>
+    <el-card>
+      <h2>课程列表</h2>
+      <el-table :data="courses" style="width: 100%">
+        <el-table-column prop="id" label="ID" width="80" />
+        <el-table-column prop="speakername" label="讲师" />
+        <el-table-column prop="title" label="标题" />
+        <el-table-column prop="place" label="地点" />
+        <el-table-column prop="time" label="时间" />
+        <el-table-column prop="maxPeople" label="最大人数" />
+        <el-table-column label="操作" width="100">
+    <template #default="scope">
+      <el-button
+        type="danger"
+        size="small"
+        :disabled="scope.row.speakername !== username"
+        @click="handleDelete(scope.row.id)"
+      >删除</el-button>
+    </template>
+  </el-table-column>
+      </el-table>
+    </el-card>
+  </div>
+  <el-button type="primary" @click="goAddCourse">新增课程</el-button>
+</template>
+
+<script setup>
+import { ref, onMounted } from 'vue'
+import axios from 'axios'
+import { useRouter } from 'vue-router'
+import { ElMessage, ElMessageBox } from 'element-plus'
+
+const router = useRouter()
+function goAddCourse() {
+  router.push('/add-course')
+}
+
+const courses = ref([])
+const username = localStorage.getItem('username') || ''
+
+
+onMounted(async () => {
+  const res = await axios.get('/api/courses')
+  courses.value = res.data
+})
+
+async function handleDelete(id) {
+  ElMessageBox.confirm('确定要删除这门课程吗？', '提示', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning',
+  }).then(async () => {
+    const res = await axios.delete(`/api/courses/${id}`)
+    if (res.data.code === 0) {
+      ElMessage.success('删除成功')
+      courses.value = courses.value.filter(course => course.id !== id)
+    } else {
+      ElMessage.error(res.data.msg || '删除失败')
+    }
+  }).catch(() => {})
+}
+</script>
