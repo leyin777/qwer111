@@ -11,9 +11,10 @@
         </el-form-item>
         <el-form-item label="身份" prop="role">
           <el-select v-model="loginForm.role" placeholder="请选择身份">
-            <el-option label="管理者" value="organizer" />
-            <el-option label="演讲者" value="speaker" />
             <el-option label="学生" value="audience" />
+            <el-option label="组织者" value="organizer" />
+            <el-option label="演讲者" value="speaker" />
+            
           </el-select>
         </el-form-item>
         <el-form-item>
