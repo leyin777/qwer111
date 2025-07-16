@@ -3,17 +3,10 @@ import os, uuid, re, shutil, tempfile, threading
 from datetime import datetime
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.responses import JSONResponse
-import aiomysql
-from contextlib import asynccontextmanager
-# 推荐用环境变量，本地开发可写死
-MYSQL_URL = dict(
-    host="127.0.0.1",
-    port=3306,
-    user="root",
-    password="z123456",
-    db="pqdb",
-    charset="utf8mb4"
-)
+
+
+
+
 # -------------------------------------------------
 # OCR 单例
 # -------------------------------------------------
@@ -168,31 +161,11 @@ def extract_doc(file_path: str) -> str:
                     for item in result[0]:
                         lines.append(item[1][0])
     return "\n".join(lines)
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    # 启动
-    pool = await aiomysql.create_pool(**MYSQL_URL)
-    async with pool.acquire() as conn:
-        async with conn.cursor() as cur:
-            await cur.execute("""
-                CREATE TABLE IF NOT EXISTS extracted_texts (
-                    id INT AUTO_INCREMENT PRIMARY KEY,
-                    filename VARCHAR(255) NOT NULL,
-                    text LONGTEXT NOT NULL,
-                    length INT NOT NULL,
-                    created_at DATETIME NOT NULL
-                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-            """)
-            await conn.commit()
-    app.state.db_pool = pool      # 挂到 app.state
-    yield                         # 应用运行期间
-    # 关闭
-    pool.close()
-    await pool.wait_closed()
+
 
 # FastAPI
 # -------------------------------------------------
-app = FastAPI(title="Text Extractor API", lifespan=lifespan)
+app = FastAPI(title="Text Extractor API")
 
 
 @app.post("/extract")
@@ -227,14 +200,7 @@ async def extract_text(file: UploadFile = File(...)):
         os.remove(tmp_path)
 
     created_at = datetime.now()
-    pool = app.state.db_pool
-    async with pool.acquire() as conn:
-        async with conn.cursor() as cur:
-            await cur.execute(
-                "INSERT INTO extracted_texts(filename, text, length, created_at) VALUES(%s,%s,%s,%s)",
-                (file.filename, text, len(text), created_at)
-            )
-            await conn.commit()
+
 
     return JSONResponse(content={
         "filename": file.filename,
