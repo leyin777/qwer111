@@ -20,4 +20,12 @@ public class UserService {
                 .eq("password", password);
         return userMapper.selectOne(wrapper);
     }
+
+    public User findByUsername(String username) {
+        return userMapper.selectOne(new QueryWrapper<User>().eq("username", username));
+    }
+
+    public boolean saveUser(User user) {
+        return userMapper.insert(user) > 0;
+    }
 }
