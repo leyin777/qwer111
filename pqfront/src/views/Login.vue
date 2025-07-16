@@ -56,7 +56,7 @@ const handleLogin = () => {
         localStorage.setItem('username', username)
         ElMessage.success('登录成功')
         // 根据身份跳转
-        if (res.data.data.role === 'admin') {
+        if (res.data.data.role === 'organizer') {
           router.push('/admin')
         } else if (res.data.data.role === 'speaker') {
           router.push('/courses')

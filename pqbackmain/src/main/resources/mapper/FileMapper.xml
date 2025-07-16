@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.FileMapper">
+    <select id="getFileList" resultType="com.example.entity.FileInfo">
+        SELECT id, name, type, url FROM file
+    </select>
+    <select id="getFileDetail" parameterType="long" resultType="com.example.entity.FileInfo">
+        SELECT id, name, type, url FROM file WHERE id = #{id}
+    </select>
+</mapper> 
