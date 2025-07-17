@@ -1,12 +1,13 @@
-import os, json, time, openai
-from pydantic import BaseModel
-from fastapi import FastAPI, HTTPException
-from fastapi.responses import JSONResponse
-from fastapi import Form
-# 1) 用环境变量读 key（不写死）
+
+import os, json
+from fastapi import APIRouter, Form
+import openai
+
+router = APIRouter()
+
 client = openai.OpenAI(
-    api_key="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",
-    base_url="https://openrouter.ai/api/v1"
+    api_key=os.getenv("OPENAI_API_KEY", "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"),
+    base_url=os.getenv("OPENAI_BASE_URL", "https://openrouter.ai/api/v1")
 )
 
 SYS_GEN = (
@@ -14,41 +15,32 @@ SYS_GEN = (
     "返回严格 JSON：{\"stem\":\"\",\"A\":\"\",\"B\":\"\",\"C\":\"\",\"D\":\"\",\"correct\":\"A|B|C|D\"}。"
     "仅一个选项完全正确，其余高迷惑。"
 )
-
 SYS_EVAL = (
     "请给上述中文题目打分（0-1）并说明理由，返回严格 JSON：{\"score\":0.00,\"reason\":\"...\"}。"
     "深度0.5，迷惑性0.3，与原文一致性0.2。"
 )
 
-class In(BaseModel):
-    text: str
-    prev: str = ""
-
-app = FastAPI()
-@app.post("/v1/question")
-def api(
+@router.post("/generate")
+def generate_question(
     text: str = Form(...),
     prev: str = Form("")
 ):
-    t0 = time.time()
     msgs = [{"role": "system", "content": SYS_GEN},
-            {"role": "user",   "content": text[:1500]}]
+            {"role": "user", "content": text[:1500]}]
     if prev:
         msgs.append({"role": "user", "content": f"上一轮评估：{prev}，请提高难度。"})
 
-    # 用 kimi
     q_raw = client.chat.completions.create(
         model="moonshotai/kimi-k2:free",
         messages=msgs,
-        max_tokens=600,
+        max_tokens=800,
         temperature=0.5,
         timeout=8
     ).choices[0].message.content
 
-    # 评估
     eval_msgs = [{"role": "system", "content": SYS_EVAL},
                  {"role": "assistant", "content": q_raw},
-                 {"role": "user",   "content": text[:800]}]
+                 {"role": "user", "content": text[:1000]}]
     meta_raw = client.chat.completions.create(
         model="moonshotai/kimi-k2:free",
         messages=eval_msgs,
@@ -57,11 +49,7 @@ def api(
         timeout=2
     ).choices[0].message.content
 
-
-
-    payload = {"question": json.loads(q_raw), "meta": json.loads(meta_raw)}
-    return JSONResponse(content=payload)
-
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    return {
+        "question": json.loads(q_raw),
+        "meta": json.loads(meta_raw)
+    }
