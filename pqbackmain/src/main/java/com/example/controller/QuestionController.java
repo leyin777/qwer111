@@ -23,10 +23,37 @@ public class QuestionController {
 
     // 提交单题答案
     @PostMapping("/answer")
-    public Map<String, Object> submitAnswer(@RequestParam Long userId, @RequestParam Long qid, @RequestBody AnswerRecord record) {
-        questionService.saveAnswerRecord(userId, qid, record);
+    public Map<String, Object> submitAnswer(@RequestParam(required = false) Long userId,
+                                            @RequestBody Map<String, Object> body) {
         Map<String, Object> result = new HashMap<>();
-        result.put("correct", record.isCorrect());
+        
+        
+        // 参数校验
+        if (userId == null && body.get("userId") != null) {
+            userId = Long.valueOf(body.get("userId").toString());
+        }
+        if (userId == null || body.get("questionId") == null || body.get("userAnswerIndex") == null || body.get("correct") == null) {
+            result.put("code", 1);
+            result.put("msg", "参数缺失，请检查 userId、questionId、userAnswerIndex、correct 是否都已传递！");
+            return result;
+        }
+        // 构造 AnswerRecord
+        Long questionId = Long.valueOf(body.get("questionId").toString());
+        int userAnswerIndex = Integer.parseInt(body.get("userAnswerIndex").toString());
+        int correct = 0;
+        Object correctObj = body.get("correct");
+        if (correctObj instanceof Number) {
+            correct = ((Number) correctObj).intValue();
+        } else if (correctObj instanceof String) {
+            correct = "1".equals(correctObj) || "true".equalsIgnoreCase((String) correctObj) ? 1 : 0;
+        }
+        // 以 questionId 作为 qid
+        Long qid = questionId;
+        AnswerRecord record = new AnswerRecord(questionId, userAnswerIndex, correct);
+        questionService.saveAnswerRecord(userId, qid, record);
+        questionService.updateQuestionAccuracy(record.getQuestionId());
+        result.put("code", 0);
+        result.put("correct", correct);
         return result;
     }
 

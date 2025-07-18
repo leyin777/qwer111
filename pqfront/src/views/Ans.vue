@@ -1,23 +1,35 @@
 <template>
   <div class="ans-container">
-    <div v-if="!isFinished">
+    <div v-if="questions.length && !isFinished">
       <h2>第{{ currentIndex + 1 }}题：{{ questions[currentIndex].question }}</h2>
       <div class="options">
-        <el-button
+        <div
           v-for="(option, idx) in questions[currentIndex].options"
           :key="idx"
-          :type="getOptionType(idx)"
-          class="option-btn"
-          @click="selectOption(idx)"
-          :disabled="answeredArr[currentIndex]"
+          class="option-row"
         >
-          {{ option }}
-        </el-button>
+          <el-button
+            :type="getOptionType(idx)"
+            class="option-btn"
+            @click="selectOption(idx)"
+            :disabled="answeredArr[currentIndex]"
+            plain
+          >
+            {{ option }}
+          </el-button>
+        </div>
       </div>
       <div class="actions">
         <el-button @click="prevQuestion" :disabled="currentIndex === 0">Back</el-button>
         <el-button @click="nextQuestion" :disabled="!answeredArr[currentIndex]">Next</el-button>
       </div>
+    </div>
+    <div v-else-if="isFinished">
+      <h2>答题结束！</h2>
+      <p>您的得分：{{ score }} / {{ questions.length }}</p>
+    </div>
+    <div v-else class="loading-empty">
+      <el-empty description="暂无题目或加载中..." />
     </div>
     <div v-else>
       <h2>答题结束！</h2>
@@ -27,51 +39,57 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { ElButton } from 'element-plus'
+import { useRoute } from 'vue-router'
+import axios from 'axios'
 
-const questions = ref([
-  {
-    question: '中国的首都是哪座城市？',
-    options: ['上海', '广州', '北京', '深圳'],
-    answer: 2
-  },
-  {
-    question: '2 + 2 = ?',
-    options: ['2', '3', '4', '5'],
-    answer: 2
-  },
-  {
-    question: '下列哪项是编程语言？',
-    options: ['Vue', 'Python', 'HTML', 'CSS'],
-    answer: 1
-  },
-  {
-    question: '地球上最大的动物是？',
-    options: ['大象', '蓝鲸', '长颈鹿', '狮子'],
-    answer: 1
-  },
-  {
-    question: '太阳从哪边升起？',
-    options: ['南', '北', '东', '西'],
-    answer: 2
-  }
-])
+const questions = ref([])
+const route = useRoute()
 
 const currentIndex = ref(0)
-const selectedOptions = ref(Array(questions.value.length).fill(null))
-const answeredArr = ref(Array(questions.value.length).fill(false))
-const score = computed(() =>
-  selectedOptions.value.reduce((acc, sel, idx) =>
-    sel === questions.value[idx].answer ? acc + 1 : acc, 0)
-)
-
+const selectedOptions = ref([])
+const answeredArr = ref([])
 const isFinished = ref(false)
 
-function selectOption(idx) {
+onMounted(async () => {
+  const qid = route.query.courseId
+  if (qid) {
+    const res = await axios.get('/api/question/list', { params: { qid } })
+    // 关键：加上 id: q.id
+    questions.value = (res.data || []).map(q => ({
+      id: q.id, // 必须加
+      question: q.content,
+      options: [q.optionA, q.optionB, q.optionC, q.optionD],
+      answer: q.correctIndex
+    }))
+    selectedOptions.value = Array(questions.value.length).fill(null)
+    answeredArr.value = Array(questions.value.length).fill(false)
+  }
+})
+
+const score = computed(() =>
+  selectedOptions.value.reduce((acc, sel, idx) =>
+    sel === questions.value[idx]?.answer ? acc + 1 : acc, 0)
+)
+
+async function selectOption(idx) {
   if (answeredArr.value[currentIndex.value]) return
   selectedOptions.value[currentIndex.value] = idx
   answeredArr.value[currentIndex.value] = true
+
+  const userId = localStorage.getItem('userId')
+  const question = questions.value[currentIndex.value]
+  try {
+    await axios.post('/api/question/answer', {
+      userId: userId,
+      questionId: question.id, // 直接用 question.id
+      userAnswerIndex: idx,
+      correct: idx === question.answer ? 1 : 0 // 传 0/1
+    })
+  } catch (e) {
+    console.error('单题答题记录上传失败', e)
+  }
 }
 
 function getOptionType(idx) {
@@ -95,13 +113,12 @@ function nextQuestion() {
   }
 }
 
+
 function prevQuestion() {
   if (currentIndex.value > 0) {
     currentIndex.value--
   }
 }
-
-
 </script>
 
 <style scoped>
@@ -116,12 +133,21 @@ function prevQuestion() {
 .options {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  margin: 24px 0;
+  gap: 18px;
+  margin: 32px 0 24px 0;
+}
+.option-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
 }
 .option-btn {
-  width: 100%;
+  flex: 1;
   text-align: left;
+  font-size: 18px;
+  height: 48px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
 }
 .actions {
   display: flex;

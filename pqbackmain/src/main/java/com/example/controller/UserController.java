@@ -32,7 +32,8 @@ public class UserController {
             session.setAttribute("role", user.getRole());
 
             result.put("code", 0);
-            result.put("data", Map.of("role", user.getRole()));
+            // 返回 userId
+            result.put("data", Map.of("userId", user.getId(), "role", user.getRole()));
             result.put("msg", "登录成功");
         } else {
             result.put("code", 1);

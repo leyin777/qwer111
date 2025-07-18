@@ -47,13 +47,22 @@ const rules = {
 
 const handleLogin = () => {
   loginFormRef.value.validate(async (valid) => {
+    console.log('login click', loginForm.value)
     if (!valid) return
     try {
       // 假设后端登录接口为 /api/login，返回 {code:0, data:{role:xxx}, msg:""}
       const { username, password, role } = loginForm.value
       const res = await axios.post('/api/login', { username, password, role })
+      console.log('login response', res.data)
       if (res.data.code === 0) {
         localStorage.setItem('username', username)
+        // 新增：存储userId
+        if (res.data.data.userId) {
+          console.log('set userId', res.data.data.userId)
+          localStorage.setItem('userId', res.data.data.userId)
+        } else {
+          console.warn('userId not found in response', res.data.data)
+        }
         ElMessage.success('登录成功')
         // 根据身份跳转
         if (res.data.data.role === 'organizer') {
@@ -67,6 +76,7 @@ const handleLogin = () => {
         ElMessage.error(res.data.msg || '登录失败')
       }
     } catch (e) {
+      console.error('login error', e)
       ElMessage.error('网络错误')
     }
   })

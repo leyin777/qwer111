@@ -37,7 +37,8 @@ const courseList = ref<Course[]>([]);
 const router = useRouter();
 
 function goToQuiz(course: Course) {
-  router.push(`/quiz/${course.id}`);
+  // 跳转到/ans并带上课程id作为参数
+  router.push({ path: '/ans', query: { courseId: course.id } });
 }
 
 onMounted(async () => {

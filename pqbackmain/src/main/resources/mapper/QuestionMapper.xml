@@ -2,9 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mapper.QuestionMapper">
     <select id="getQuestionsByQid" parameterType="long" resultType="com.example.entity.Question">
-        SELECT id, qid, content, option_a, option_b, option_c, option_d, correct_index
+        SELECT id, qid, text as content, ansa as option_a, ansb as option_b, ansc as option_c, ansd as option_d,
+               CASE correct
+                   WHEN 'A' THEN 0
+                   WHEN 'B' THEN 1
+                   WHEN 'C' THEN 2
+                   WHEN 'D' THEN 3
+               END as correct_index,
+               accuracy
         FROM question
         WHERE qid = #{qid}
+        ORDER BY id ASC
     </select>
 
     <insert id="saveAnswerRecord">
@@ -21,4 +29,14 @@
         SELECT COUNT(*) FROM answer_record
         WHERE user_id = #{userId} AND qid = #{qid}
     </select>
+
+    <select id="countTotalByQuestionId" parameterType="long" resultType="int">
+        SELECT COUNT(*) FROM answer_record WHERE question_id = #{questionId}
+    </select>
+    <select id="countCorrectByQuestionId" parameterType="long" resultType="int">
+        SELECT COUNT(*) FROM answer_record WHERE question_id = #{questionId} AND correct = 1
+    </select>
+    <update id="updateAccuracy" parameterType="map">
+        UPDATE question SET accuracy = #{accuracy} WHERE id = #{questionId}
+    </update>
 </mapper> 

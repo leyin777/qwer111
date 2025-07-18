@@ -27,4 +27,11 @@ public class QuestionService {
     public int countTotalAnswers(Long userId, Long qid) {
         return questionMapper.countTotalAnswers(userId, qid);
     }
+
+    public void updateQuestionAccuracy(Long questionId) {
+        int total = questionMapper.countTotalByQuestionId(questionId);
+        int correct = questionMapper.countCorrectByQuestionId(questionId);
+        double accuracy = total == 0 ? 0 : (double) correct / total;
+        questionMapper.updateAccuracy(accuracy, questionId);
+    }
 } 
