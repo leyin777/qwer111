@@ -17,4 +17,7 @@ public interface QuestionMapper {
     // 获取某用户某题组的答题统计
     int countCorrectAnswers(@Param("userId") Long userId, @Param("qid") Long qid);
     int countTotalAnswers(@Param("userId") Long userId, @Param("qid") Long qid);
+    int countTotalByQuestionId(@Param("questionId") Long questionId);
+    int countCorrectByQuestionId(@Param("questionId") Long questionId);
+    void updateAccuracy(@Param("accuracy") double accuracy, @Param("questionId") Long questionId);
 } 

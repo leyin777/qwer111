@@ -54,6 +54,7 @@ const rules = {
 const handleRegister = () => {
   registerForm.value.validate(async (valid) => {
     if (valid) {
+      // 发送注册请求
       try {
         const res = await fetch('/api/register', {
           method: 'POST',
@@ -61,11 +62,11 @@ const handleRegister = () => {
           body: JSON.stringify(form.value)
         })
         const data = await res.json()
-        if (data.code === 0) {
+        if (data.success) {
           ElMessage.success('注册成功，请登录')
           router.push('/login')
         } else {
-          ElMessage.error(data.msg || '注册失败')
+          ElMessage.error(data.message || '注册失败')
         }
       } catch (e) {
         ElMessage.error('网络错误')

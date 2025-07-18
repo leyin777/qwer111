@@ -11,12 +11,19 @@
         <el-table-column prop="maxPeople" label="最大人数" />
         <el-table-column label="操作" width="100">
     <template #default="scope">
-      <el-button
-        type="danger"
-        size="small"
-        :disabled="scope.row.speakername !== username"
-        @click="handleDelete(scope.row.id)"
-      >删除</el-button>
+      <div style="display: flex; flex-direction: column; gap: 8px; align-items: flex-start;">
+        <el-button
+          type="primary"
+          size="small"
+          @click="viewAnswerInfo(scope.row)"
+        >查看答题</el-button>
+        <el-button
+          type="danger"
+          size="small"
+          :disabled="scope.row.speakername !== username"
+          @click="handleDelete(scope.row.id)"
+        >删除</el-button>
+      </div>
     </template>
   </el-table-column>
       </el-table>
@@ -26,6 +33,9 @@
 </template>
 
 <script setup>
+function viewAnswerInfo(course) {
+  router.push({ path: '/ansinf', query: { courseId: course.id, title: course.title } })
+}
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
 import { useRouter } from 'vue-router'
