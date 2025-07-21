@@ -2,16 +2,19 @@
   <div class="student-container">
     <el-card>
       <div class="header">
-        <h2>可参与课程</h2>
+        <h2>可参与演讲</h2>
       </div>
       <el-table :data="courseList" style="width: 100%; margin-top: 20px;">
-        <el-table-column prop="title" label="课程题目" />
+        <el-table-column prop="title" label="演讲题目" />
         <el-table-column prop="place" label="地点" />
         <el-table-column prop="time" label="时间" />
         <el-table-column label="操作">
           <template #default="scope">
             <el-button type="primary" size="small" @click="goToQuiz(scope.row)">
               开始答题
+            </el-button>
+            <el-button type="warning" size="small" @click="goToFeedback(scope.row)" style="margin-left: 8px;">
+              问题反馈
             </el-button>
           </template>
         </el-table-column>
@@ -39,6 +42,10 @@ const router = useRouter();
 function goToQuiz(course: Course) {
   // 跳转到/ans并带上课程id作为参数
   router.push({ path: '/ans', query: { courseId: course.id } });
+}
+
+function goToFeedback(course: Course) {
+  router.push({ path: '/feedback', query: { courseId: course.id } });
 }
 
 onMounted(async () => {

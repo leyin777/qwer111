@@ -5,6 +5,7 @@ import com.example.service.CourseService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import jakarta.annotation.Resource;
 import java.util.List;
@@ -23,6 +24,7 @@ import jakarta.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = "*")
 public class CourseController {
     @Resource
     private CourseService courseService;
@@ -30,6 +32,11 @@ public class CourseController {
     @GetMapping("/courses")
     public List<Course> getAllCourses() {
         return courseService.getAllCourses();
+    }
+
+    @GetMapping("/courses/{id}")
+    public Course getCourseById(@PathVariable Long id) {
+        return courseService.getById(id);
     }
 
     @PostMapping("/courses")

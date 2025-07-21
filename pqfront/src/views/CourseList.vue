@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-card>
-      <h2>课程列表</h2>
+      <h2>演讲列表</h2>
       <el-table :data="courses" style="width: 100%">
         <el-table-column prop="id" label="ID" width="80" />
         <el-table-column prop="speakername" label="讲师" />
@@ -16,7 +16,7 @@
           type="primary"
           size="small"
           @click="viewAnswerInfo(scope.row)"
-        >查看答题</el-button>
+        >演讲报告</el-button>
         <el-button
           type="danger"
           size="small"
@@ -29,7 +29,7 @@
       </el-table>
     </el-card>
   </div>
-  <el-button type="primary" @click="goAddCourse">新增课程</el-button>
+  <el-button type="primary" @click="goAddCourse">新增演讲</el-button>
 </template>
 
 <script setup>

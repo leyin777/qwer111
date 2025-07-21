@@ -5,6 +5,7 @@ import com.example.entity.AnswerRecord;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
+import java.util.Date;
 
 @Mapper
 public interface QuestionMapper {
@@ -20,4 +21,5 @@ public interface QuestionMapper {
     int countTotalByQuestionId(@Param("questionId") Long questionId);
     int countCorrectByQuestionId(@Param("questionId") Long questionId);
     void updateAccuracy(@Param("accuracy") double accuracy, @Param("questionId") Long questionId);
+    Date getCourseCreateTimeByQuestionId(@Param("questionId") Long questionId);
 } 

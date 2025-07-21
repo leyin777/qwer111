@@ -10,6 +10,7 @@ public class Question {
     private String optionD;
     private int correctIndex;
     private Double accuracy;
+    private Integer correctUserCount;
 
     public Question() {}
 
@@ -31,4 +32,6 @@ public class Question {
     public void setCorrectIndex(int correctIndex) { this.correctIndex = correctIndex; }
     public Double getAccuracy() { return accuracy; }
     public void setAccuracy(Double accuracy) { this.accuracy = accuracy; }
+    public Integer getCorrectUserCount() { return correctUserCount; }
+    public void setCorrectUserCount(Integer correctUserCount) { this.correctUserCount = correctUserCount; }
 } 

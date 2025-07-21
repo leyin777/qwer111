@@ -6,6 +6,7 @@ import com.example.mapper.QuestionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Date;
 
 @Service
 public class QuestionService {
@@ -33,5 +34,19 @@ public class QuestionService {
         int correct = questionMapper.countCorrectByQuestionId(questionId);
         double accuracy = total == 0 ? 0 : (double) correct / total;
         questionMapper.updateAccuracy(accuracy, questionId);
+    }
+
+    public boolean isWithinAnswerTimeLimit(Long questionId) {
+        Date courseCreateTime = questionMapper.getCourseCreateTimeByQuestionId(questionId);
+        if (courseCreateTime == null) {
+            return false;
+        }
+        
+        long currentTime = System.currentTimeMillis();
+        long createTime = courseCreateTime.getTime();
+        long timeDiff = currentTime - createTime;
+        long twoHoursInMillis = 2 * 60 * 60 * 1000;
+        
+        return timeDiff <= twoHoursInMillis;
     }
 } 

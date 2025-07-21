@@ -4,6 +4,8 @@ import com.example.entity.User;
 import com.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RestController;
 
 //import jakarta.annotation.Resource;
 import java.util.HashMap;
@@ -12,6 +14,7 @@ import jakarta.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = "*")
 public class UserController {
 
     @Autowired

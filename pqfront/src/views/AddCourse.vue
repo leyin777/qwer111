@@ -1,12 +1,12 @@
 <template>
   <div class="add-course-container">
     <el-card>
-      <h2 style="text-align:center;">增加课程</h2>
+      <h2 style="text-align:center;">增加演讲</h2>
       <el-form :model="form" ref="formRef" label-width="100px" style="margin-top:20px;">
         <el-form-item label="演讲者名称" prop="speakername">
           <el-input v-model="form.speakername" :disabled="true" />
         </el-form-item>
-        <el-form-item label="课程题目" prop="title">
+        <el-form-item label="演讲题目" prop="title">
           <el-input v-model="form.title" />
         </el-form-item>
         <el-form-item label="演讲地点" prop="place">
@@ -51,7 +51,7 @@ async function handleSubmit() {
   // 前端校验
   const loginName = localStorage.getItem('username')
   if (form.value.speakername !== loginName) {
-    ElMessage.error('只能添加自己的课程')
+    ElMessage.error('只能添加自己的演讲')
     return
   }
   try {

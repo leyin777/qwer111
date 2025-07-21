@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.RankMapper">
+    
+    <!-- 插入排名记录 -->
+    <insert id="insertRank" parameterType="com.example.entity.Rank" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO rank (id, uid, qid, accuracy, ranking)
+        VALUES (NULL, #{uid}, #{qid}, #{accuracy}, #{ranking})
+    </insert>
+    
+    <!-- 根据qid获取所有排名记录（按正确率降序） -->
+    <select id="getRanksByQid" parameterType="int" resultType="com.example.entity.Rank">
+        SELECT id, uid, qid, accuracy, ranking
+        FROM rank 
+        WHERE qid = #{qid}
+        ORDER BY CAST(accuracy AS DECIMAL(5,2)) DESC, id ASC
+    </select>
+    
+    <!-- 根据qid获取排名详细信息（包括用户名） -->
+    <select id="getRankDetailsByQid" parameterType="int" resultType="map">
+        SELECT 
+            r.ranking as ranking,
+            u.username as username,
+            r.accuracy as accuracy,
+            ROUND(CAST(r.accuracy AS DECIMAL(5,2)) * 5 / 100, 0) as score
+        FROM rank r
+        LEFT JOIN user u ON r.uid = u.id
+        WHERE r.qid = #{qid}
+        ORDER BY CAST(r.accuracy AS DECIMAL(5,2)) DESC, r.id ASC
+    </select>
+    
+    <!-- 检查用户是否已有排名记录 -->
+    <select id="getRankByUserAndQid" resultType="com.example.entity.Rank">
+        SELECT id, uid, qid, accuracy, ranking
+        FROM rank 
+        WHERE uid = #{uid} AND qid = #{qid}
+        LIMIT 1
+    </select>
+    
+    <!-- 更新排名记录 -->
+    <update id="updateRank" parameterType="com.example.entity.Rank">
+        UPDATE rank 
+        SET accuracy = #{accuracy}, 
+            ranking = #{ranking}
+        WHERE id = #{id}
+    </update>
+    
+    <!-- 删除指定qid的所有排名记录 -->
+    <delete id="deleteRanksByQid" parameterType="int">
+        DELETE FROM rank WHERE qid = #{qid}
+    </delete>
+    
+    <!-- 获取指定qid的排名记录数量 -->
+    <select id="countRanksByQid" parameterType="int" resultType="int">
+        SELECT COUNT(*) FROM rank WHERE qid = #{qid}
+    </select>
+    
+</mapper> 
