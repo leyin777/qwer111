@@ -15,8 +15,12 @@ const routes = [
   { path: '/add-course', component: () => import('@/views/AddCourse.vue') },
   { path: '/ans', component: () => import('../views/Ans.vue') },
   { path: '/ansinf', component: () => import('../views/ansinf.vue') },
+<<<<<<< HEAD:11/pqfront/src/router/index.js
   { path: '/feedback', component: () => import('../views/Feedback.vue') },
   { path: '/discussion', component: () => import('../views/Discussion.vue') }
+=======
+  { path: '/feedback', component: () => import('../views/Feedback.vue') }
+>>>>>>> 5f7b2035a6b7be31b680c3370e277b36019b2740:pqfront/src/router/index.js
   // 其他页面继续添加
 ]
 
