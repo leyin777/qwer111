@@ -23,7 +23,7 @@
               style="margin-left: 8px;"
               :disabled="!isDiscussionTime(scope.row.time)"
             >
-              即时讨论区
+            讨论区
             </el-button>
           </template>
         </el-table-column>
@@ -68,8 +68,8 @@ function isDiscussionTime(speechTime: string): boolean {
   // 转换为分钟
   const diffMinutes = timeDiff / (1000 * 60);
   
-  // 判断是否在讨论时间范围内（演讲开始后30分钟到1小时之间）
-  return diffMinutes >= 30 && diffMinutes <= 60;
+  // 判断是否在讨论时间范围内（演讲开始后30分钟即可）
+  return diffMinutes >= 30;
 }
 
 function goToDiscussion(course: Course) {
@@ -84,7 +84,7 @@ function goToDiscussion(course: Course) {
     if (diffMinutes < 30) {
       ElMessage.warning('讨论区还未开放，请等待演讲开始后30分钟');
     } else {
-      ElMessage.warning('讨论时间已结束');
+      ElMessage.warning('讨论区暂未开放');
     }
   }
 }

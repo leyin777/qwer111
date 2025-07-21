@@ -9,11 +9,12 @@
         <result column="username" property="username" />
         <result column="course_id" property="courseId" />
         <result column="create_time" property="createTime" />
+        <result column="role" property="role" />
     </resultMap>
     
     <!-- 根据课程ID获取所有评论 -->
     <select id="getCommentsByCourseId" resultMap="CommentResultMap">
-        SELECT id, content, username, course_id, create_time
+        SELECT id, content, username, course_id, create_time, role
         FROM comments
         WHERE course_id = #{courseId}
         ORDER BY create_time DESC
@@ -21,8 +22,8 @@
     
     <!-- 插入新评论 -->
     <insert id="insertComment" parameterType="com.example.entity.Comment" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO comments (content, username, course_id, create_time)
-        VALUES (#{content}, #{username}, #{courseId}, NOW())
+        INSERT INTO comments (content, username, course_id, create_time, role)
+        VALUES (#{content}, #{username}, #{courseId}, NOW(), #{role})
     </insert>
     
     <!-- 根据ID删除评论 -->

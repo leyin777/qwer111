@@ -8,6 +8,7 @@ public class Comment {
     private String username;
     private Integer courseId;
     private Date createTime;
+    private String role;
 
     public Comment() {}
 
@@ -57,5 +58,13 @@ public class Comment {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 } 
