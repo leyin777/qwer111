@@ -16,15 +16,6 @@
             <el-button type="warning" size="small" @click="goToFeedback(scope.row)" style="margin-left: 8px;">
               问题反馈
             </el-button>
-            <el-button 
-              type="success" 
-              size="small" 
-              @click="goToDiscussion(scope.row)" 
-              style="margin-left: 8px;"
-              :disabled="!isDiscussionTime(scope.row.time)"
-            >
-              即时讨论区
-            </el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -35,7 +26,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
-import { ElMessage } from 'element-plus';
 import axios from 'axios';
 
 interface Course {
@@ -56,37 +46,6 @@ function goToQuiz(course: Course) {
 
 function goToFeedback(course: Course) {
   router.push({ path: '/feedback', query: { courseId: course.id } });
-}
-
-function isDiscussionTime(speechTime: string): boolean {
-  const now = new Date();
-  const speechDate = new Date(speechTime);
-  
-  // 计算时间差（毫秒）
-  const timeDiff = now.getTime() - speechDate.getTime();
-  
-  // 转换为分钟
-  const diffMinutes = timeDiff / (1000 * 60);
-  
-  // 判断是否在讨论时间范围内（演讲开始后30分钟到1小时之间）
-  return diffMinutes >= 30 && diffMinutes <= 60;
-}
-
-function goToDiscussion(course: Course) {
-  if (isDiscussionTime(course.time)) {
-    router.push({ path: '/discussion', query: { courseId: course.id } });
-  } else {
-    const now = new Date();
-    const speechDate = new Date(course.time);
-    const timeDiff = now.getTime() - speechDate.getTime();
-    const diffMinutes = timeDiff / (1000 * 60);
-    
-    if (diffMinutes < 30) {
-      ElMessage.warning('讨论区还未开放，请等待演讲开始后30分钟');
-    } else {
-      ElMessage.warning('讨论时间已结束');
-    }
-  }
 }
 
 onMounted(async () => {
