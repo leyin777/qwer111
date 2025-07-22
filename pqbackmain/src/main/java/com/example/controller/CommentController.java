@@ -49,7 +49,12 @@ public class CommentController {
             Comment comment = new Comment();
             comment.setContent(content);
             comment.setCourseId(courseId);
-            comment.setUsername("匿名用户"); // 暂时使用匿名用户，后续可以集成用户系统
+            comment.setUsername(request.getOrDefault("username", "匿名用户").toString());
+            if (request.get("role") != null) {
+                comment.setRole(request.get("role").toString());
+            } else {
+                comment.setRole("audience");
+            }
             
             // 保存评论
             boolean success = commentService.addComment(comment);

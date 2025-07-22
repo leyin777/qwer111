@@ -38,7 +38,9 @@
           </div>
           <div v-else class="comment-item" v-for="comment in comments" :key="comment.id">
             <div class="comment-header">
-              <span class="username">{{ comment.username }}</span>
+              <span class="username">
+                {{ (comment.role === 'organizer' || comment.role === 'speaker') ? comment.username : (comment.username || '匿名用户') }}
+              </span>
               <span class="time">{{ formatTime(comment.createTime) }}</span>
             </div>
             <div class="comment-content">
@@ -102,6 +104,7 @@ interface Comment {
   username: string;
   createTime: string;
   courseId: number;
+  role?: string; // 新增
 }
 
 const route = useRoute();
@@ -112,6 +115,9 @@ const showAddCommentDialog = ref(false);
 const newComment = ref({
   content: ''
 });
+
+const role = localStorage.getItem('role') || '';
+const username = localStorage.getItem('username') || '';
 
 onMounted(async () => {
   const courseId = route.query.courseId;
@@ -170,21 +176,22 @@ async function addComment() {
     ElMessage.warning('请输入评论内容');
     return;
   }
-
+  // 组织者和演讲者不能匿名评论
+  if ((role === 'organizer' || role === 'speaker') && !username) {
+    ElMessage.error('组织者和演讲者不能匿名评论，请先登录');
+    return;
+  }
   try {
     const courseId = Number(route.query.courseId);
-    const res = await axios.post('/api/comments', {
+    await axios.post('/api/comments', {
       content: newComment.value.content,
-      courseId: courseId
+      courseId: courseId,
+      username: username, // 始终传递用户名
+      role: role // 传递当前用户角色
     });
-    
-    // 重新加载评论列表
     await loadComments(courseId);
-    
-    // 清空输入框并关闭对话框
     newComment.value.content = '';
     showAddCommentDialog.value = false;
-    
     ElMessage.success('评论发表成功');
   } catch (e) {
     console.error('评论发表失败', e);
