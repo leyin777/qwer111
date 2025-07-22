@@ -68,7 +68,7 @@ const handleLogin = () => {
         if (res.data.data.role === 'organizer') {
           router.push('/admin')
         } else if (res.data.data.role === 'speaker') {
-          router.push('/speaker')
+          router.push('/courses')
         } else if (res.data.data.role === 'audience') {
           router.push('/student')
         }
@@ -108,4 +108,4 @@ const handleRegister = () => {
 .el-button {
   width: 100px;
 }
-</style>
+</style> 

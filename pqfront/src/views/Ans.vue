@@ -82,8 +82,8 @@ onMounted(async () => {
     if (courseTime) {
       const createTime = new Date(courseTime).getTime()
       const now = Date.now()
-      const twoHours = 2 * 60 * 60 * 1000
-      if (now - createTime > twoHours) {
+      const halfHour = 0.5 * 60 * 60 * 1000
+      if (now - createTime > halfHour) {
         isOutOfTime.value = true
         setTimeout(() => {
           window.$message ? window.$message.warning('不在答题时间内') : alert('不在答题时间内')

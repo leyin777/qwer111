@@ -62,7 +62,7 @@ async function handleSubmit() {
     const res = await axios.post('/api/courses', payload)
     if (res.data.code === 0) {
       ElMessage.success('添加成功')
-      router.push('/courses')
+      router.push('/speaker')
     } else {
       ElMessage.error(res.data.msg || '添加失败')
     }
