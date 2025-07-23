@@ -20,6 +20,7 @@ AIpq为python后端,实现模态转换和生成问题的api，pdf,txt,doc,docx,p
 本地部署需要启动docker，docker build然后docker run即可。
 
 docker build -t aipqapi:v2 .
+
 docker run --rm -it -p 8000:8000 --name aipqapi aipqapi:v2
 
 docker镜像已经部署到服务器上，路径为http://159.75.90.202:8000/aipqapi/extract（/generate)
