@@ -10,7 +10,7 @@ AIpq为python后端,实现模态转换和生成问题的api，pdf,txt,doc,docx,p
 因为需要配置环境较复杂，这部分后端打包成docker镜像，并将带dockerfile构建文件夹上传到仓库，命名为aipqapi，模型文件较大，所以先下载模型，前两个放入models文件夹，后一个放入whisper,不下载也可以，只不过每次docker run时需要重新下载比较慢。
 文件夹中requirements.txt已包含所需依赖。
 
-## 模型下载说明。
+## 模型下载说明
 | 文件名             | 来源            | 下载地址                                                                                     |
 |-------------------|-----------------|--------------------------------------------------------------------------------------------- |
 | craft_mlt_25k.pth | CRAFT 文本检测   | (https://drive.google.com/uc?id=1Jk4eGD7crsqCCg9C9VjCLkMN3ze8kutZ)             |
