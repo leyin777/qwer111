@@ -17,7 +17,7 @@ AIpq为python后端,实现模态转换和生成问题的api，pdf,txt,doc,docx,p
 | zh_sim_g2.pth     | EasyOCR 中文识别 | (https://github.com/JaidedAI/EasyOCR/releases/download/v1.3/zh_sim_g2.pth)   | 
 | base.pt           | Whisper 基础模型 | (https://openaipublic.azureedge.net/main/whisper/models/ed3a0b6b1c0edf879ad9b11b1af5a0e6ab5db9205f891f668f8b0e6c6326e34e/base.pt) |                        
 
-本地部署需要启动docker，docker build然后docker run即可。
+本地部署需要启动docker，在aipqapi文件夹中启动cmd
 
 docker build -t aipqapi:v2 .
 
