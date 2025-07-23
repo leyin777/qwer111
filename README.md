@@ -15,7 +15,9 @@ AIpq为python后端,实现模态转换和生成问题的api，pdf,txt,doc,docx,p
 |-------------------|-----------------|--------------------------------------------------------------------------------------------- |
 | craft_mlt_25k.pth | CRAFT 文本检测   | (https://drive.google.com/uc?id=1Jk4eGD7crsqCCg9C9VjCLkMN3ze8kutZ)             |
 | zh_sim_g2.pth     | EasyOCR 中文识别 | (https://github.com/JaidedAI/EasyOCR/releases/download/v1.3/zh_sim_g2.pth)   | 
-| base.pt           | Whisper 基础模型 | (https://openaipublic.azureedge.net/main/whisper/models/ed3a0b6b1c0edf879ad9b11b1af5a0e6ab5db9205f891f668f8b0e6c6326e34e/base.pt) |                                                    
+| base.pt           | Whisper 基础模型 | (https://openaipublic.azureedge.net/main/whisper/models/ed3a0b6b1c0edf879ad9b11b1af5a0e6ab5db9205f891f668f8b0e6c6326e34e/base.pt) |                        
+
+本地部署需要启动docker，docker build然后docker run即可。
 docker镜像已经部署到服务器上，路径为http://159.75.90.202:8000/aipqapi/extract（/generate)
 两个功能分别为各模态转化文字和生成问题。但由于服务器主机性能问题，在ppt(非pptx),doc(非docx)，以及较长pptx的转化都是会有问题的，而这些在本地测试时都是通过的，所以建议本地部署docker镜像以达到最好效果。
 
