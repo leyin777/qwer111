@@ -8,7 +8,7 @@ pqbackmain为后端代码，pqfront为前端代码，AIpq为信息处理及生�
 AIpq为python后端,实现模态转换和生成问题的api，pdf,txt,doc,docx,ppt,pptx,常见音频视频转换成文本，目前未与项目整体适配，
 使用conda管理环境。使用python的fastapi部署在本地8000端口进行本地测试，需要依赖有python-multipart、python-pptx、python-docx、pdfplumber，easyocr等,使用工具poppler等。
 
-因为需要配置环境较复杂，这部分后端打包成docker镜像，并将带dockerfile构建文件夹上传到仓库，命名为aipqapi，模型文件较大，所以先下载模型，前两个放入models文件夹，后一个放入whisper,不下载也可以，只不过每次docker run时需要重新下载比较慢。
+因为需要配置环境较复杂，需要相应依赖，模型，工具。这部分后端打包成docker镜像，并将带dockerfile构建文件夹上传到仓库，命名为aipqapi，模型文件较大，所以先下载模型，前两个放入models文件夹，后一个放入whisper,不下载也可以，只不过每次docker run时需要重新下载比较慢。
 文件夹中requirements.txt已包含所需依赖。
 
 ## 模型下载说明
