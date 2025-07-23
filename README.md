@@ -31,7 +31,7 @@ docker run --rm -it -p 8000:8000 --name aipqapi aipqapi:v2
 
 ## 远程部署
 docker镜像已经部署到服务器上，路径为http://159.75.90.202:8000/aipqapi/extract（/generate)
-两个功能分别为各模态转化文字和生成问题。但由于服务器主机性能问题，在ppt(非pptx),doc(非docx)，以及较长pptx的转化都是会有问题的，而这些在本地测试时都是通过的，所以建议本地部署docker镜像以达到最好效果。
+两个功能分别为各模态转化文字和生成问题。但由于服务器主机性能问题，在ppt(非pptx),doc(非docx)，以及较长pptx的转化都是会有问题的，而这些在本地测试时都是通过的，所以建议本地部署以达到最好效果。
 
 运行说明：
 pqfront在vscode中允许，pqbackmain在IDEA中运行，数据库中有部分数据可以完成部分功能
