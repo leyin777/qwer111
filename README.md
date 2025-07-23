@@ -19,9 +19,9 @@ AIpq为python后端,实现模态转换和生成问题的api，pdf,txt,doc,docx,p
 ### 模型下载说明
 | 文件名             | 来源            | 下载地址                                                                                     |
 |-------------------|-----------------|--------------------------------------------------------------------------------------------- |
-| craft_mlt_25k.pth | CRAFT 文本检测   | (https://drive.google.com/uc?id=1Jk4eGD7crsqCCg9C9VjCLkMN3ze8kutZ)             |
-| zh_sim_g2.pth     | EasyOCR 中文识别 | (https://github.com/JaidedAI/EasyOCR/releases/download/v1.3/zh_sim_g2.pth)   | 
-| base.pt           | Whisper 基础模型 | (https://openaipublic.azureedge.net/main/whisper/models/ed3a0b6b1c0edf879ad9b11b1af5a0e6ab5db9205f891f668f8b0e6c6326e34e/base.pt) |                        
+| craft_mlt_25k.pth | CRAFT 文本检测   |  https://github.com/JaidedAI/EasyOCR/releases/download/pre-v1.1.6/craft_mlt_25k.zip|
+| zh_sim_g2.pth     | EasyOCR 中文识别 | https://github.com/JaidedAI/EasyOCR/releases/download/v1.3/zh_sim_g2.zip   | 
+| base.pt           | Whisper 基础模型 | https://openaipublic.azureedge.net/main/whisper/models/ed3a0b6b1c0edf879ad9b11b1af5a0e6ab5db9205f891f668f8b0e6c6326e34e/base.pt|                        
 
 本地部署需要启动docker，在aipqapi文件夹中启动cmd。
 
