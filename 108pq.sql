@@ -1,7 +1,13 @@
 /*
+<<<<<<< HEAD
  Navicat Premium Data Transfer
 
  Source Server         : 数据库
+=======
+ Navicat Premium Dump SQL
+
+ Source Server         : 108666
+>>>>>>> aa160017106f85071d702a1b6dd5764135ac3ba9
  Source Server Type    : MySQL
  Source Server Version : 80042 (8.0.42)
  Source Host           : localhost:3306
@@ -11,13 +17,18 @@
  Target Server Version : 80042 (8.0.42)
  File Encoding         : 65001
 
+<<<<<<< HEAD
  Date: 25/07/2025 23:32:24
+=======
+ Date: 25/07/2025 18:35:37
+>>>>>>> aa160017106f85071d702a1b6dd5764135ac3ba9
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
+<<<<<<< HEAD
 -- Table structure for addfile
 -- ----------------------------
 DROP TABLE IF EXISTS `addfile`;
@@ -34,6 +45,8 @@ CREATE TABLE `addfile`  (
 INSERT INTO `addfile` VALUES (1, '顶顶顶顶顶顶', 1);
 
 -- ----------------------------
+=======
+>>>>>>> aa160017106f85071d702a1b6dd5764135ac3ba9
 -- Table structure for answer_record
 -- ----------------------------
 DROP TABLE IF EXISTS `answer_record`;
@@ -45,7 +58,11 @@ CREATE TABLE `answer_record`  (
   `user_answer_index` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
   `correct` tinyint(1) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
+<<<<<<< HEAD
 ) ENGINE = InnoDB AUTO_INCREMENT = 128 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+=======
+) ENGINE = InnoDB AUTO_INCREMENT = 118 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+>>>>>>> aa160017106f85071d702a1b6dd5764135ac3ba9
 
 -- ----------------------------
 -- Records of answer_record
@@ -80,6 +97,7 @@ INSERT INTO `answer_record` VALUES (109, 1, 102, 102, '3', 1);
 INSERT INTO `answer_record` VALUES (110, 1, 103, 103, '1', 1);
 INSERT INTO `answer_record` VALUES (111, 1, 104, 104, '1', 1);
 INSERT INTO `answer_record` VALUES (112, 1, 105, 105, '0', 1);
+<<<<<<< HEAD
 INSERT INTO `answer_record` VALUES (113, 1, 101, 101, '1', 1);
 INSERT INTO `answer_record` VALUES (114, 1, 102, 102, '3', 1);
 INSERT INTO `answer_record` VALUES (115, 1, 103, 103, '1', 1);
@@ -95,6 +113,13 @@ INSERT INTO `answer_record` VALUES (124, 1, 102, 102, '1', 0);
 INSERT INTO `answer_record` VALUES (125, 1, 103, 103, '2', 0);
 INSERT INTO `answer_record` VALUES (126, 1, 104, 104, '2', 0);
 INSERT INTO `answer_record` VALUES (127, 1, 105, 105, '1', 0);
+=======
+INSERT INTO `answer_record` VALUES (113, 1, 101, 101, '3', 0);
+INSERT INTO `answer_record` VALUES (114, 1, 102, 102, '1', 0);
+INSERT INTO `answer_record` VALUES (115, 1, 103, 103, '3', 0);
+INSERT INTO `answer_record` VALUES (116, 1, 104, 104, '3', 0);
+INSERT INTO `answer_record` VALUES (117, 1, 105, 105, '2', 0);
+>>>>>>> aa160017106f85071d702a1b6dd5764135ac3ba9
 
 -- ----------------------------
 -- Table structure for comments
@@ -110,7 +135,11 @@ CREATE TABLE `comments`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_course_id`(`course_id` ASC) USING BTREE,
   INDEX `idx_create_time`(`create_time` ASC) USING BTREE
+<<<<<<< HEAD
 ) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '评论表' ROW_FORMAT = DYNAMIC;
+=======
+) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '评论表' ROW_FORMAT = Dynamic;
+>>>>>>> aa160017106f85071d702a1b6dd5764135ac3ba9
 
 -- ----------------------------
 -- Records of comments
@@ -140,7 +169,11 @@ CREATE TABLE `course`  (
 -- ----------------------------
 -- Records of course
 -- ----------------------------
+<<<<<<< HEAD
 INSERT INTO `course` VALUES (1, 'wanglaoshi', '中国近代史', '101', '2025-07-25 16:10:25', 100);
+=======
+INSERT INTO `course` VALUES (1, 'wanglaoshi', '中国近代史', '101', '2025-07-25 18:10:25', 100);
+>>>>>>> aa160017106f85071d702a1b6dd5764135ac3ba9
 INSERT INTO `course` VALUES (2, 'wanglaoshi', 'vue基础', '102', '2025-07-14 17:20:54', 120);
 
 -- ----------------------------
@@ -171,7 +204,11 @@ INSERT INTO `feedback` VALUES (3, 1, 3, 1, 0, 0, 0, '1', '2025-07-19 17:55:05');
 -- ----------------------------
 DROP TABLE IF EXISTS `question`;
 CREATE TABLE `question`  (
+<<<<<<< HEAD
   `id` int NOT NULL AUTO_INCREMENT,
+=======
+  `id` int NULL DEFAULT NULL,
+>>>>>>> aa160017106f85071d702a1b6dd5764135ac3ba9
   `text` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
   `ansa` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
   `ansb` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
@@ -179,13 +216,26 @@ CREATE TABLE `question`  (
   `ansd` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
   `correct` char(1) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
   `qid` int NULL DEFAULT NULL,
+<<<<<<< HEAD
   `accuracy` float NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 128 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+=======
+  `accuracy` float NULL DEFAULT NULL
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = DYNAMIC;
+>>>>>>> aa160017106f85071d702a1b6dd5764135ac3ba9
 
 -- ----------------------------
 -- Records of question
 -- ----------------------------
+<<<<<<< HEAD
+=======
+INSERT INTO `question` VALUES (101, '中国的首都是哪座？', '上海', '北京', '深圳', '重庆', 'B', 1, 0.714286);
+INSERT INTO `question` VALUES (102, '2 + 2 = ?', '1', '2', '3', '4', 'D', 1, 0.714286);
+INSERT INTO `question` VALUES (103, '下列哪项是编程语言？', 'vue', 'python', 'css', 'html', 'B', 1, 0.714286);
+INSERT INTO `question` VALUES (104, '地球上最大的动物是？', '大象', '蓝鲸', '老鼠', '麻雀', 'B', 1, 0.571429);
+INSERT INTO `question` VALUES (105, '太阳从哪边升起？', '东', '南', '西', '北', 'A', 1, 0.428571);
+>>>>>>> aa160017106f85071d702a1b6dd5764135ac3ba9
 
 -- ----------------------------
 -- Table structure for rankk
@@ -203,9 +253,15 @@ CREATE TABLE `rankk`  (
 -- ----------------------------
 -- Records of rankk
 -- ----------------------------
+<<<<<<< HEAD
 INSERT INTO `rankk` VALUES (13, 1, 1, '100.00', '1');
 INSERT INTO `rankk` VALUES (14, 3, 1, '60.00', '2');
 INSERT INTO `rankk` VALUES (16, 2, 1, '0.00', '3');
+=======
+INSERT INTO `rankk` VALUES (13, 1, 1, '0.00', '2');
+INSERT INTO `rankk` VALUES (14, 3, 1, '60.00', '1');
+INSERT INTO `rankk` VALUES (16, 2, 1, '0.00', '2');
+>>>>>>> aa160017106f85071d702a1b6dd5764135ac3ba9
 
 -- ----------------------------
 -- Table structure for user
