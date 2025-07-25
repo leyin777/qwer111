@@ -205,7 +205,7 @@ docker run --rm -it -p 8000:8000 --name aipqapi aipqapi:v2
 
 ### 远程部署
 docker镜像已经部署到服务器上，路径为http://159.75.90.202:8000/aipqapi/extract（/generate)
-两个功能分别为各模态转化文字和生成问题。但由于服务器主机性能问题（免费试用的双核2GB内存），在ppt(非pptx),doc(非docx)，以及较长pptx的转化都是会有问题的，这些在本地测试时都是通过的。且使用的ai apikey是免费的，有输入字数限制，，新AIpq使用另外apikey,所以建议本地部署以达到最好效果。也可以docker run 时更改一下apikey的环境变量。新的key写在AIpq中aiapiclient.py中
+两个功能分别为各模态转化文字和生成问题。但由于服务器主机性能问题（免费试用的双核2GB内存），在ppt(非pptx),doc(非docx)，以及较长pptx的转化都是会有问题的，这些在本地测试时都是通过的。且使用的ai apikey是免费的，有输入字数限制，，新AIpq使用另外apikey,所以建议本地部署以达到最好效果。也可以docker run 时更改一下apikey的环境变量。新的key写在AIpq中aiapiclient.py中作为默认值
 
 <img width="536" height="255" alt="image" src="https://github.com/user-attachments/assets/51f82c3a-9624-4560-bde2-5f0475ad471c" />
 
