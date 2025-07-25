@@ -1,5 +1,4 @@
 AI-coding为刚开始时练习代码，与项目无关
-<<<<<<< HEAD
 pqbackmain为后端代码，pqfront为前端代码，AIpq为信息处理及生成题目的后端代码，目前AIpq尚未与项目整体结合。
 
 # 项目说明
@@ -8,11 +7,13 @@ pqbackmain为后端代码，pqfront为前端代码，AIpq为信息处理及生�
 
 # 项目说明
 pqbackmain为后端代码，pqfront为前端代码，AIpq为信息处理及生成题目的后端代码，目前AIpq尚未与项目整体结合。108.sql为mysql数据库
-
 # 数据库
 
-# 转化文字和问题生成后端本地部署和远程部署
 
+
+
+
+# 转化文字和问题生成后端本地部署和远程部署
 ## 本地直接部署
 AIpq为python后端,实现模态转换和生成问题的api，pdf,txt,doc,docx,ppt,pptx,常见音频视频转换成文本，目前未与项目整体适配，
 使用conda管理环境。使用python的fastapi部署在本地8000端口进行本地测试，需要依赖有python-multipart、python-pptx、python-docx、pdfplumber，easyocr等,使用工具poppler等。aipqapi文件夹中requirements.txt已包含所需依赖。
