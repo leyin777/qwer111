@@ -174,11 +174,14 @@ npm install element-plus
 3. 安装 Axios（HTTP 请求库）
 npm install axios
 
-## java后端部署
-使用IDEA打开pqbackmain文件夹，等待相关依赖下载即可（采用java17，若有报错请检查Java版本）
-
 ## 数据库部署
 使用navicat创建一个名为108pq的mysql数据库，然后运行108pq.sql文件，即部署完成。不使用navicat图形界面，直接使用mysql命令也可以。
+
+## java后端部署
+使用IDEA打开pqbackmain文件夹，等待相关依赖下载即可（采用java17，若有报错请检查Java版本），application.yml中配置自己的数据库
+<img width="1204" height="243" alt="image" src="https://github.com/user-attachments/assets/9a29522d-9ed8-4bd4-a4c9-d469e18cda6e" />
+application.properties中可根据需要将aipq.baseurl更改为python部分部署的端口（注意端口后是有斜杠的），不想本地部署python部分可以直接使用已经部署好的http://159.75.90.202:8000/I（建议本地部署测试效果最好）
+<img width="1522" height="365" alt="image" src="https://github.com/user-attachments/assets/bca67c86-ecc8-42f9-83ec-5791be2d723b" />
 
 ## python转化文字和问题生成后端本地部署和远程部署
 AIpq为python后端,实现模态转换和生成问题的api，pdf,txt,doc,docx,ppt,pptx,常见音频视频转换成文本，
@@ -208,8 +211,6 @@ docker镜像已经部署到服务器上，路径为http://159.75.90.202:8000/aip
 两个功能分别为各模态转化文字和生成问题。但由于服务器主机性能问题（免费试用的双核2GB内存），在ppt(非pptx),doc(非docx)，以及较长pptx的转化都是会有问题的，这些在本地测试时都是通过的。且使用的ai apikey是免费的，有输入字数限制，，新AIpq使用另外apikey,所以建议本地部署以达到最好效果。也可以docker run 时更改一下apikey的环境变量。新的key写在AIpq中aiapiclient.py中作为默认值
 
 <img width="536" height="255" alt="image" src="https://github.com/user-attachments/assets/51f82c3a-9624-4560-bde2-5f0475ad471c" />
-
-
 
 运行说明：
 pqfront在vscode中允许，pqbackmain在IDEA中运行，数据库中有部分数据可以完成部分功能
