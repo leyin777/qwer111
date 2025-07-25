@@ -180,7 +180,7 @@ npm install axios
 ## java后端部署
 使用IDEA打开pqbackmain文件夹，等待相关依赖下载即可（采用java17，若有报错请检查Java版本），application.yml中配置自己的数据库
 <img width="1204" height="243" alt="image" src="https://github.com/user-attachments/assets/9a29522d-9ed8-4bd4-a4c9-d469e18cda6e" />
-application.properties中可根据需要将aipq.baseurl更改为python部分部署的端口（注意端口后是有斜杠的），不想本地部署python部分可以直接使用已经部署好的http://159.75.90.202:8000/I（建议本地部署测试效果最好）
+application.properties中可根据需要将aipq.baseurl更改为python部分部署的端口（注意端口后是有斜杠的），不想本地部署python部分可以直接使用已经部署好的http://159.75.90.202:8000/（建议本地部署测试效果最好）
 <img width="1522" height="365" alt="image" src="https://github.com/user-attachments/assets/bca67c86-ecc8-42f9-83ec-5791be2d723b" />
 
 ## python转化文字和问题生成后端本地部署和远程部署
