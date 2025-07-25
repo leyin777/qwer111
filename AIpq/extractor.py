@@ -22,7 +22,7 @@ from aiapiclient import client
 router = APIRouter()
 
 # ---------- 统一 OCR ----------
-ocr = easyocr.Reader(['ch_sim', 'en'], gpu=False)
+ocr = easyocr.Reader(['ch_sim', 'en'], gpu=True)
 
 # ---------- 工具函数 ----------
 def extract_txt(p):
@@ -49,7 +49,7 @@ def extract_ppt(p):
     tmp = tempfile.mkdtemp()
     try:
         subprocess.run([
-            r"D:\libre\program\soffice.exe",  # 绝对路径
+            "soffice",  #
             "--headless",
             "--convert-to", "pptx",
             "--outdir", tmp,
@@ -108,7 +108,7 @@ def extract_doc(p):
     import subprocess, tempfile, os, shutil
     tmp = tempfile.mkdtemp()
     subprocess.run([
-        r"D:\libre\program\soffice.exe",  # 你本地的路径
+        "soffice",  #
         "--headless",
         "--convert-to", "docx",
         "--outdir", tmp,
@@ -121,10 +121,7 @@ def extract_doc(p):
     return text
 
 def extract_audio(p: str) -> str:
-    """
-    使用 openai-whisper 本地转写音频
-    支持 mp3/wav/m4a/flac/ogg 等常见格式
-    """
+
     model = whisper.load_model("base")  # 可选 tiny/base/small/medium/large
     result = model.transcribe(p, language="zh")  # language="zh" 可提升中文准确率
     return result["text"].strip()
@@ -174,7 +171,7 @@ def extract_video(
     cap.release()
     return polish_text("\n".join(all_text))
 
-#整理文本
+#AI整理文本
 def polish_text(raw: str) -> str:
     if not raw.strip():
         return ""

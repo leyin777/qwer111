@@ -22,7 +22,7 @@ from aiapiclient import client
 router = APIRouter()
 
 # ---------- 统一 OCR ----------
-ocr = easyocr.Reader(['ch_sim', 'en'], gpu=False)
+ocr = easyocr.Reader(['ch_sim', 'en'], gpu=True)
 
 # ---------- 工具函数 ----------
 def extract_txt(p):

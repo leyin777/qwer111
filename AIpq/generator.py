@@ -27,10 +27,10 @@ async def generate_question(
     prompt = (
         f"你是严格的中文出题专家。请基于用户文本一次生成 {n} 道高难度四选一选择题。\n"
         "要求：\n"
-        "1) 正确选项分布随机，不要全是单一选项；\n"
-        "2) 每题题干必须考察对文本深层因果、论证结构或隐含前提的理解；\n"
-        "3) 题目不依赖该文本；\n"
-        "4) 每题四个选项中仅一个完全正确，其余三项必须高度迷惑；\n"
+        "1) 正确答案不要全A或全B或全C或全D！！！这条最重要\n"
+        "2) 题目不能依赖该文本，如“根据文中”这类描述不应该出现，这条非常重要；\n"
+        "3)每题四个选项中仅一个完全正确，其余三项必须高度迷惑；\n"
+        "4) 每题题干必须考察对文本深层因果、论证结构或隐含前提的理解；\n"
         "5) 返回严格 JSON 数组，每条格式：\n"
         "[{\"stem\":\"\",\"A\":\"\",\"B\":\"\",\"C\":\"\",\"D\":\"\",\"correct\":\"\"}]"
     )
@@ -52,7 +52,7 @@ async def generate_question(
 
     def evaluate_once(qs: List[Dict]) -> Tuple[int, List[Dict]]:
         """一次性评估，返回 (不及格数量, metas)"""
-        eval_user = "原文：\n" + text[:1000] + "\n\n题目列表：\n"
+        eval_user = "原文：\n" + text + "\n\n题目列表：\n"
         for idx, q in enumerate(qs, 1):
             eval_user += f"{idx}. {json.dumps(q, ensure_ascii=False)}\n"
         msgs = [
@@ -77,7 +77,7 @@ async def generate_question(
 
     messages = [
         {"role": "system", "content": prompt},
-        {"role": "user", "content": text[:2000]}
+        {"role": "user", "content": text}
     ]
     questions = call_llm(messages,n)
     for _ in range(max_retry):
@@ -89,20 +89,20 @@ async def generate_question(
             "要求：\n"
             "1) 正确选项分布随机，不要全是单一选项；\n"
             "2) 每题题干必须考察对文本深层因果、论证结构或隐含前提的理解；\n"
-            "3) 题目不依赖该文本；\n"
+            "3) 题目不依赖该文本，非常重要；\n"
             "4) 每题四个选项中仅一个完全正确，其余三项必须高度迷惑；\n"
             "5) 返回严格 JSON 数组，每条格式：\n"
             "[{\"stem\":\"\",\"A\":\"\",\"B\":\"\",\"C\":\"\",\"D\":\"\",\"correct\":\"\"}]"
         )
         regen_messages = [
             {"role": "system", "content":regen_messages},
-            {"role": "user", "content": f"原文：{text[:2000]}\n上一轮 {fail_cnt} 题未达标，请重新生成。"}
+            {"role": "user", "content": f"原文：{text}\n上一轮 {fail_cnt} 题未达标，请重新生成。"}
         ]
         new_qs = call_llm(regen_messages, fail_cnt)
 
         idx = 0
         for i, m in enumerate(metas):
-            if int(m.get("score", 0)) < 60:
+            if int(m.get("score", 0)) < 70:
                 questions[i] = new_qs[idx]
                 idx += 1
                 if idx == len(new_qs):
