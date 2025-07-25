@@ -1,0 +1,13 @@
+fastapi
+uvicorn[standard]
+python-multipart
+python-pptx
+python-docx
+pdfplumber
+pdf2image
+Pillow
+opencv-python-headless
+whisper-openai
+easyocr
+numpy
+openai

@@ -18,13 +18,6 @@
           @click="viewAnswerInfo(scope.row)"
         >演讲报告</el-button>
         <el-button
-          type="success"
-          size="small"
-          @click="goToDiscussion(scope.row)"
-          style="margin-top: 4px;"
-          :disabled="!isDiscussionTime(scope.row.time)"
-        >讨论区</el-button>
-        <el-button
           type="danger"
           size="small"
           :disabled="scope.row.speakername !== username"
@@ -76,27 +69,5 @@ async function handleDelete(id) {
       ElMessage.error(res.data.msg || '删除失败')
     }
   }).catch(() => {})
-}
-
-function isDiscussionTime(speechTime) {
-  const now = new Date();
-  const speechDate = new Date(speechTime);
-  const diffMinutes = (now.getTime() - speechDate.getTime()) / (1000 * 60);
-  return diffMinutes >= 30;
-}
-
-function goToDiscussion(course) {
-  if (isDiscussionTime(course.time)) {
-    router.push({ path: '/discussion', query: { courseId: course.id } });
-  } else {
-    const now = new Date();
-    const speechDate = new Date(course.time);
-    const diffMinutes = (now.getTime() - speechDate.getTime()) / (1000 * 60);
-    if (diffMinutes < 30) {
-      ElMessage.warning('讨论区还未开放，请等待演讲开始后30分钟');
-    } else {
-      ElMessage.warning('讨论区暂未开放');
-    }
-  }
 }
 </script>
