@@ -181,7 +181,7 @@ npm install axios
 使用navicat创建一个名为108pq的mysql数据库，然后运行108pq.sql文件，即部署完成。不使用navicat图形界面，直接使用mysql命令也可以。
 
 ## python转化文字和问题生成后端本地部署和远程部署
-AIpq为python后端,实现模态转换和生成问题的api，pdf,txt,doc,docx,ppt,pptx,常见音频视频转换成文本，目前未与项目整体适配，
+AIpq为python后端,实现模态转换和生成问题的api，pdf,txt,doc,docx,ppt,pptx,常见音频视频转换成文本，
 使用conda管理环境。使用python的fastapi部署在本地8000端口进行本地测试，需要依赖有python-multipart、python-pptx、python-docx、pdfplumber，easyocr等,使用工具poppler等。aipqapi文件夹中requirements.txt已包含所需依赖。（如使用镜像源，需要找有pytorch-gpu版本的源，本项目使用的easyocr依赖pytorch，图片识别时gpu加速需要使用cuda，需要安装pytorch-gpu版本调用cuda库,常用的清华源是不支持下载带cuda版本的pytorch的，同理docekrfile中默认使用清华源安装依赖，所以有需要请自行更改。如果不安装cuda版本的pytorch也可以，只不过使用cpu运行，在转化较多图片的文件时速度较慢，测试用pptx花费约2-3分钟，而测试用pdf则无这个问题）
 ### 本地直接部署
 直接下载AIpq项目，并下载工具poppler(用于将pdf转化为图片)和libreoffice(将ppt，doc转化成pptx,docx)配置系统环境变量，方便程序调用。运行main.py后等待模型下载完成即可
