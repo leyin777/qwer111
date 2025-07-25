@@ -20,15 +20,4 @@ public class UserService {
                 .eq("password", password);
         return userMapper.selectOne(wrapper);
     }
-
-    public boolean register(User user) {
-        // 检查用户名是否已存在
-        QueryWrapper<User> wrapper = new QueryWrapper<>();
-        wrapper.eq("username", user.getUsername());
-        User exist = userMapper.selectOne(wrapper);
-        if (exist != null) {
-            return false;
-        }
-        return userMapper.insert(user) > 0;
-    }
 }

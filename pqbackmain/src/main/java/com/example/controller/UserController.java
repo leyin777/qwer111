@@ -44,18 +44,4 @@ public class UserController {
         }
         return result;
     }
-
-    @PostMapping("/register")
-    public Map<String, Object> register(@RequestBody User user) {
-        Map<String, Object> result = new HashMap<>();
-        boolean success = userService.register(user);
-        if (success) {
-            result.put("success", true);
-            result.put("message", "注册成功");
-        } else {
-            result.put("success", false);
-            result.put("message", "用户名已存在");
-        }
-        return result;
-    }
 }
