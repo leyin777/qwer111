@@ -7,17 +7,13 @@ pqbackmain为后端代码，pqfront为前端代码，AIpq为信息处理及生�
 
 # 项目说明
 pqbackmain为后端代码，pqfront为前端代码，AIpq为信息处理及生成题目的后端代码，目前AIpq尚未与项目整体结合。108.sql为mysql数据库
-# 数据库
-
-
-
-
+# 数据库部署
+使用navicat创建一个名为108pq的mysql数据库，然后运行108pq.sql文件，即部署完成。不使用navicat图形界面，直接使用mysql命令也可以。
 
 ## 转化文字和问题生成后端本地部署和远程部署
-### 本地直接部署
 AIpq为python后端,实现模态转换和生成问题的api，pdf,txt,doc,docx,ppt,pptx,常见音频视频转换成文本，目前未与项目整体适配，
-使用conda管理环境。使用python的fastapi部署在本地8000端口进行本地测试，需要依赖有python-multipart、python-pptx、python-docx、pdfplumber，easyocr等,使用工具poppler等。aipqapi文件夹中requirements.txt已包含所需依赖。
-
+使用conda管理环境。使用python的fastapi部署在本地8000端口进行本地测试，需要依赖有python-multipart、python-pptx、python-docx、pdfplumber，easyocr等,使用工具poppler等。aipqapi文件夹中requirements.txt已包含所需依赖。（如使用镜像源，需要找有pytorch-gpu版本的源，本项目使用的easyocr依赖pytorch，图片识别时gpu加速需要使用cuda，需要安装pytorch-gpu版本调用cuda库。如果不安装也可以，只不过使用cpu运行，在转化较多图片的文件时速度较慢，测试用pptx花费约2-3分钟，而测试用pdf则无这个问题）
+### 本地直接部署
 直接下载AIpq项目，并下载工具poppler(用于将pdf转化为图片)和libreoffice(将ppt，doc转化成pptx,docx)配置系统环境变量，方便程序调用。运行main.py后等待模型下载完成即可
 
 ### 本地docker部署
