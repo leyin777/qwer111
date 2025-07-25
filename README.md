@@ -2,6 +2,8 @@
 # 项目说明
 AI-coding为刚开始时练习代码，与项目无关
 pqbackmain为后端代码，pqfront为前端代码，AIpq为信息处理及生成题目的后端代码,aipqapi为构建docker镜像的文件夹。108pq.sql为mysql数据库
+# 项目概述
+
 ## 前端结构表
 pqfront
 
