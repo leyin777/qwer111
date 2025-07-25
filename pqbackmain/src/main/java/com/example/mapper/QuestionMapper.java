@@ -22,4 +22,6 @@ public interface QuestionMapper {
     int countCorrectByQuestionId(@Param("questionId") Long questionId);
     void updateAccuracy(@Param("accuracy") double accuracy, @Param("questionId") Long questionId);
     Date getCourseCreateTimeByQuestionId(@Param("questionId") Long questionId);
+    // 插入单个题目
+    void insert(Question question);
 } 

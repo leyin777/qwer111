@@ -50,4 +50,9 @@
         INNER JOIN question q ON c.id = q.qid
         WHERE q.id = #{questionId}
     </select>
+
+    <insert id="insert" parameterType="com.example.entity.Question">
+        INSERT INTO question (text, ansa, ansb, ansc, ansd, correct, qid, accuracy)
+        VALUES (#{text}, #{ansa}, #{ansb}, #{ansc}, #{ansd}, #{correct}, #{qid}, #{accuracy})
+    </insert>
 </mapper> 
