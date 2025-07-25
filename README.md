@@ -3,7 +3,8 @@
 AI-coding为刚开始时练习代码，与项目无关
 pqbackmain为后端代码，pqfront为前端代码，AIpq为信息处理及生成题目的后端代码,aipqapi为构建docker镜像的文件夹。108pq.sql为mysql数据库
 ## 前端结构表
-pqfront/
+pqfront
+
 ├─ index.html                # 项目入口 HTML 文件
 
 ├─ jsconfig.json             # JavaScript 配置文件，通常用于路径别名等
@@ -45,6 +46,7 @@ pqfront/
     │
 
     │
+    
     ├─ router/               # 路由配置目录
     
     │   └─ index.js          # Vue Router 配置文件
@@ -75,30 +77,54 @@ pqfront/
         
         └─ Student.vue       # 学生页面
 ## 后端结构表
-pqbackmain/
+pqbackmain
+
 │
+
 ├── mvnw, mvnw.cmd                # Maven Wrapper 脚本，便于项目构建
+
 ├── pom.xml                       # Maven 项目配置文件
+
 ├── src/
+
 │   ├── main/
+
 │   │   ├── java/
+
 │   │   │   └── com/
+
 │   │   │       └── example/
+
 │   │   │           ├── Application.java      # Spring Boot 启动类
+
 │   │   │           ├── controller/           # 控制器层，处理 HTTP 请求
+
 │   │   │           ├── entity/               # 实体类，数据库表映射
+
 │   │   │           ├── mapper/               # MyBatis Mapper 接口，数据库操作
+
 │   │   │           └── service/              # 业务逻辑层
+
 │   │   └── resources/
+
 │   │       ├── application.properties        # Spring Boot 配置文件（属性格式）
+
 │   │       ├── application.yml               # Spring Boot 配置文件（YAML 格式）
+
 │   │       └── mapper/                       # MyBatis 映射文件（XML，写SQL语句）
+
 │   └── test/
+
 │       └── java/
+
 │           └── com/
+
 │               └── example/
+
 │                   └── pqbackmain/
+
 │                       └── PqbackmainApplicationTests.java   # 测试类
+
 └── target/                        # Maven 构建输出目录
 
 ## 数据库部署
