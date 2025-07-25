@@ -1,7 +1,7 @@
 /*
  Navicat Premium Dump SQL
 
- Source Server         : 098_JDBC
+ Source Server         : 108pq
  Source Server Type    : MySQL
  Source Server Version : 50727 (5.7.27)
  Source Host           : localhost:3306
@@ -11,7 +11,7 @@
  Target Server Version : 50727 (5.7.27)
  File Encoding         : 65001
 
- Date: 22/07/2025 23:56:56
+ Date: 25/07/2025 16:14:47
 */
 
 SET NAMES utf8mb4;
@@ -29,7 +29,7 @@ CREATE TABLE `answer_record`  (
   `user_answer_index` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `correct` tinyint(1) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 98 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 113 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of answer_record
@@ -49,6 +49,21 @@ INSERT INTO `answer_record` VALUES (94, 3, 102, 102, '3', 1);
 INSERT INTO `answer_record` VALUES (95, 3, 103, 103, '1', 1);
 INSERT INTO `answer_record` VALUES (96, 3, 104, 104, '0', 0);
 INSERT INTO `answer_record` VALUES (97, 3, 105, 105, '1', 0);
+INSERT INTO `answer_record` VALUES (98, 1, 101, 101, '1', 1);
+INSERT INTO `answer_record` VALUES (99, 1, 102, 102, '3', 1);
+INSERT INTO `answer_record` VALUES (100, 1, 103, 103, '1', 1);
+INSERT INTO `answer_record` VALUES (101, 1, 104, 104, '1', 1);
+INSERT INTO `answer_record` VALUES (102, 1, 105, 105, '0', 1);
+INSERT INTO `answer_record` VALUES (103, 1, 101, 101, '1', 1);
+INSERT INTO `answer_record` VALUES (104, 1, 102, 102, '3', 1);
+INSERT INTO `answer_record` VALUES (105, 1, 103, 103, '1', 1);
+INSERT INTO `answer_record` VALUES (106, 1, 104, 104, '1', 1);
+INSERT INTO `answer_record` VALUES (107, 1, 105, 105, '3', 0);
+INSERT INTO `answer_record` VALUES (108, 1, 101, 101, '1', 1);
+INSERT INTO `answer_record` VALUES (109, 1, 102, 102, '3', 1);
+INSERT INTO `answer_record` VALUES (110, 1, 103, 103, '1', 1);
+INSERT INTO `answer_record` VALUES (111, 1, 104, 104, '1', 1);
+INSERT INTO `answer_record` VALUES (112, 1, 105, 105, '0', 1);
 
 -- ----------------------------
 -- Table structure for course
@@ -67,7 +82,7 @@ CREATE TABLE `course`  (
 -- ----------------------------
 -- Records of course
 -- ----------------------------
-INSERT INTO `course` VALUES (1, 'wanglaoshi', '中国近代史', '101', '2025-07-22 23:20:25', 100);
+INSERT INTO `course` VALUES (1, 'wanglaoshi', '中国近代史', '101', '2025-07-25 16:10:25', 100);
 INSERT INTO `course` VALUES (2, 'wanglaoshi', 'vue基础', '102', '2025-07-14 17:20:54', 120);
 
 -- ----------------------------
@@ -129,11 +144,11 @@ CREATE TABLE `question`  (
 -- ----------------------------
 -- Records of question
 -- ----------------------------
-INSERT INTO `question` VALUES (101, '中国的首都是哪座？', '上海', '北京', '深圳', '重庆', 'B', 1, 0.666667);
-INSERT INTO `question` VALUES (102, '2 + 2 = ?', '1', '2', '3', '4', 'D', 1, 0.666667);
-INSERT INTO `question` VALUES (103, '下列哪项是编程语言？', 'vue', 'python', 'css', 'html', 'B', 1, 0.666667);
-INSERT INTO `question` VALUES (104, '地球上最大的动物是？', '大象', '蓝鲸', '老鼠', '麻雀', 'B', 1, 0.333333);
-INSERT INTO `question` VALUES (105, '太阳从哪边升起？', '东', '南', '西', '北', 'A', 1, 0.333333);
+INSERT INTO `question` VALUES (101, '中国的首都是哪座？', '上海', '北京', '深圳', '重庆', 'B', 1, 0.833333);
+INSERT INTO `question` VALUES (102, '2 + 2 = ?', '1', '2', '3', '4', 'D', 1, 0.833333);
+INSERT INTO `question` VALUES (103, '下列哪项是编程语言？', 'vue', 'python', 'css', 'html', 'B', 1, 0.833333);
+INSERT INTO `question` VALUES (104, '地球上最大的动物是？', '大象', '蓝鲸', '老鼠', '麻雀', 'B', 1, 0.666667);
+INSERT INTO `question` VALUES (105, '太阳从哪边升起？', '东', '南', '西', '北', 'A', 1, 0.5);
 
 -- ----------------------------
 -- Table structure for rank
