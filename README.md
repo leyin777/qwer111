@@ -2,7 +2,7 @@
 # 项目说明
 AI-coding为刚开始时练习代码，与项目无关
 pqbackmain为后端代码，pqfront为前端代码，AIpq为信息处理及生成题目的后端代码,aipqapi为构建docker镜像的文件夹。108pq.sql为mysql数据库
-# 数据库部署
+## 数据库部署
 使用navicat创建一个名为108pq的mysql数据库，然后运行108pq.sql文件，即部署完成。不使用navicat图形界面，直接使用mysql命令也可以。
 
 ## 转化文字和问题生成后端本地部署和远程部署
