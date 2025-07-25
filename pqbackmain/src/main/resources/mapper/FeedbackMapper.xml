@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.FeedbackMapper">
+    
+    <!-- 插入反馈记录 -->
+    <insert id="insertFeedback" parameterType="com.example.entity.Feedback" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO feedback (id, qid, uid, too_fast, too_slow, boring, bad_question, comment, created_at)
+        VALUES (NULL, #{qid}, #{uid}, #{tooFast}, #{tooSlow}, #{boring}, #{badQuestion}, #{comment}, NOW())
+    </insert>
+    
+    <!-- 获取反馈统计 -->
+    <select id="getFeedbackStats" parameterType="int" resultType="map">
+        SELECT 
+            SUM(too_fast) as tooFastCount,
+            SUM(too_slow) as tooSlowCount,
+            SUM(boring) as boringCount,
+            SUM(bad_question) as badQuestionCount,
+            COUNT(*) as totalFeedbackCount
+        FROM feedback 
+        WHERE qid = #{qid}
+    </select>
+    
+    <!-- 获取所有评论 -->
+    <select id="getCommentsByQid" parameterType="int" resultType="com.example.entity.Feedback">
+        SELECT id, qid, uid, too_fast as tooFast, too_slow as tooSlow, 
+               boring, bad_question as badQuestion, comment, created_at as createdAt
+        FROM feedback 
+        WHERE qid = #{qid} AND comment IS NOT NULL AND comment != ''
+        ORDER BY created_at DESC
+    </select>
+    
+    <!-- 检查用户是否已经提交过反馈 -->
+    <select id="getFeedbackByUserAndQid" resultType="com.example.entity.Feedback">
+        SELECT id, qid, uid, too_fast as tooFast, too_slow as tooSlow, 
+               boring, bad_question as badQuestion, comment, created_at as createdAt
+        FROM feedback 
+        WHERE uid = #{uid} AND qid = #{qid}
+        LIMIT 1
+    </select>
+    
+    <!-- 更新反馈记录 -->
+    <update id="updateFeedback" parameterType="com.example.entity.Feedback">
+        UPDATE feedback 
+        SET too_fast = #{tooFast}, 
+            too_slow = #{tooSlow}, 
+            boring = #{boring}, 
+            bad_question = #{badQuestion}, 
+            comment = #{comment}
+        WHERE id = #{id}
+    </update>
+    
+</mapper> 
