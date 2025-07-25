@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.QuestionMapper">
+    <select id="getQuestionsByQid" parameterType="long" resultType="com.example.entity.Question">
+        SELECT q.id, q.qid, q.text as content, q.ansa as option_a, q.ansb as option_b, 
+               q.ansc as option_c, q.ansd as option_d,
+               CASE q.correct
+                   WHEN 'A' THEN 0
+                   WHEN 'B' THEN 1
+                   WHEN 'C' THEN 2
+                   WHEN 'D' THEN 3
+               END as correct_index,
+               q.accuracy,
+               COUNT(DISTINCT ar.user_id) as correct_user_count
+        FROM question q
+        LEFT JOIN answer_record ar ON q.id = ar.question_id AND ar.correct = 1
+        WHERE q.qid = #{qid}
+        GROUP BY q.id, q.qid, q.text, q.ansa, q.ansb, q.ansc, q.ansd, q.correct, q.accuracy
+        ORDER BY q.id ASC
+    </select>
+
+    <insert id="saveAnswerRecord">
+        INSERT INTO answer_record(user_id, qid, question_id, user_answer_index, correct)
+        VALUES(#{userId}, #{qid}, #{record.questionId}, #{record.userAnswerIndex}, #{record.correct})
+    </insert>
+
+    <select id="countCorrectAnswers" resultType="int">
+        SELECT COUNT(*) FROM answer_record
+        WHERE user_id = #{userId} AND qid = #{qid} AND correct = 1
+    </select>
+
+    <select id="countTotalAnswers" resultType="int">
+        SELECT COUNT(*) FROM answer_record
+        WHERE user_id = #{userId} AND qid = #{qid}
+    </select>
+
+    <select id="countTotalByQuestionId" parameterType="long" resultType="int">
+        SELECT COUNT(*) FROM answer_record WHERE question_id = #{questionId}
+    </select>
+    <select id="countCorrectByQuestionId" parameterType="long" resultType="int">
+        SELECT COUNT(*) FROM answer_record WHERE question_id = #{questionId} AND correct = 1
+    </select>
+    <update id="updateAccuracy" parameterType="map">
+        UPDATE question SET accuracy = #{accuracy} WHERE id = #{questionId}
+    </update>
+
+    <select id="getCourseCreateTimeByQuestionId" parameterType="long" resultType="java.util.Date">
+        SELECT c.time 
+        FROM course c
+        INNER JOIN question q ON c.id = q.qid
+        WHERE q.id = #{questionId}
+    </select>
+</mapper>
