@@ -79,53 +79,35 @@ pqfront
 ## 后端结构表
 pqbackmain
 
-│
+├─ src/
 
-├── mvnw, mvnw.cmd                # Maven Wrapper 脚本，便于项目构建
+│ ├─ main/
 
-├── pom.xml                       # Maven 项目配置文件
+│ │ ├─ java/
 
-├── src/
+│ │ │ └─ com/
 
-│   ├── main/
+│ │ │ └─ example/
 
-│   │   ├── java/
+│ │ │ ├─ Application.java # Spring Boot 启动类，项目入口
 
-│   │   │   └── com/
+│ │ │ │
 
-│   │   │       └── example/
+│ │ │ ├─ controller/ # 控制器层，处 HTTP 请求
 
-│   │   │           ├── Application.java      # Spring Boot 启动类
+│ │ │ ├─ entity/ # 实体类，数据库表映射
 
-│   │   │           ├── controller/           # 控制器层，处理 HTTP 请求
+│ │ │ ├─ mapper/ # MyBatis Mapper 接口，数据库操作
 
-│   │   │           ├── entity/               # 实体类，数据库表映射
+│ │ │ ├─service/ # 业务逻辑层
 
-│   │   │           ├── mapper/               # MyBatis Mapper 接口，数据库操作
+│ │ └─ resources/
 
-│   │   │           └── service/              # 业务逻辑层
+│ │ ├─ application.properties # Spring Boot 配置文件（属性格式）
 
-│   │   └── resources/
+│ │ ├─ application.yml # Spring Boot 配置文件（YAML 格式）
 
-│   │       ├── application.properties        # Spring Boot 配置文件（属性格式）
-
-│   │       ├── application.yml               # Spring Boot 配置文件（YAML 格式）
-
-│   │       └── mapper/                       # MyBatis 映射文件（XML，写SQL语句）
-
-│   └── test/
-
-│       └── java/
-
-│           └── com/
-
-│               └── example/
-
-│                   └── pqbackmain/
-
-│                       └── PqbackmainApplicationTests.java   # 测试类
-
-└── target/                        # Maven 构建输出目录
+│ │ └─ mapper/ # MyBatis 映射文件（SQL 语句）
 
 ## 数据库部署
 使用navicat创建一个名为108pq的mysql数据库，然后运行108pq.sql文件，即部署完成。不使用navicat图形界面，直接使用mysql命令也可以。
