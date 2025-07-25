@@ -4,53 +4,76 @@ AI-coding为刚开始时练习代码，与项目无关
 pqbackmain为后端代码，pqfront为前端代码，AIpq为信息处理及生成题目的后端代码,aipqapi为构建docker镜像的文件夹。108pq.sql为mysql数据库
 ## 前端结构表
 pqfront/
+├─ index.html                # 项目入口 HTML 文件
+
+├─ jsconfig.json             # JavaScript 配置文件，通常用于路径别名等
+
+├─ package-lock.json         # npm 自动生成的依赖锁定文件，保证依赖一致性
+
+├─ package.json              # 项目依赖及脚本配置文件
+
+├─ pqfront.iml               # IDE（如 IntelliJ IDEA）生成的项目配置文件
+
+├─ README_DISCUSSION.md      # 讨论相关的说明文档
+
+├─ README.md                 # 项目主说明文档
+
+├─ vite.config.js            # Vite 构建工具的配置文件
+
 │
-├─ index.html                // 项目入口 HTML 文件
-├─ jsconfig.json             // JavaScript 配置文件，通常用于路径别名等
-├─ package-lock.json         // npm 自动生成的依赖锁定文件，保证依赖一致性
-├─ package.json              // 项目依赖及脚本配置文件
-├─ pqfront.iml               // IDE（如 IntelliJ IDEA）生成的项目配置文件
-├─ README_DISCUSSION.md      // 讨论相关的说明文档
-├─ README.md                 // 项目主说明文档
-├─ vite.config.js            // Vite 构建工具的配置文件
+
+├─ public/                   # 公共资源目录，构建时会被直接复制到输出目录
+
+│   └─ favicon.ico           # 网站图标
+
 │
-├─ public/                   // 公共资源目录，构建时会被直接复制到输出目录
-│   └─ favicon.ico           // 网站图标
-│
-└─ src/                      // 源码目录
-    ├─ App.vue               // Vue 根组件
-    ├─ main.js               // 项目入口 JS 文件，初始化 Vue 应用
-    ├─ assets/               // 静态资源目录（如样式、图片等）
-    │   ├─ base.css          // 基础样式文件
-    │   ├─ logo.svg          // 项目 logo
-    │   └─ main.css          // 主样式文件
+
+└─ src/                      # 源码目录
+
+    ├─ App.vue               # Vue 根组件
+    
+    ├─ main.js               # 项目入口 JS 文件，初始化 Vue 应用
+    
+    ├─ assets/               # 静态资源目录（如样式、图片等）
+    
+    │   ├─ base.css          # 基础样式文件
+    
+    │   ├─ logo.svg          # 项目 logo
+    
+    │   └─ main.css          # 主样式文件
+    
     │
-    ├─ components/           // 公共组件目录
-    │   ├─ HelloWorld.vue    // 示例组件
-    │   ├─ TheWelcome.vue    // 欢迎页组件
-    │   ├─ WelcomeItem.vue   // 欢迎页子项组件
-    │   └─ icons/            // 图标组件目录
-    │       ├─ IconCommunity.vue      // 社区图标组件
-    │       ├─ IconDocumentation.vue  // 文档图标组件
-    │       ├─ IconEcosystem.vue      // 生态图标组件
-    │       ├─ IconSupport.vue        // 支持图标组件
-    │       └─ IconTooling.vue        // 工具图标组件
+
     │
-    ├─ router/               // 路由配置目录
-    │   └─ index.js          // Vue Router 配置文件
+    ├─ router/               # 路由配置目录
+    
+    │   └─ index.js          # Vue Router 配置文件
+    
     │
-    └─ views/                // 页面级组件目录
-        ├─ AddCourse.vue     // 添加课程页面
-        ├─ Admin.vue         // 管理员页面
-        ├─ Ans.vue           // 答案页面
-        ├─ ansinf.vue        // 答案信息页面
-        ├─ CourseList.vue    // 课程列表页面
-        ├─ Discussion.vue    // 讨论区页面
-        ├─ Feedback.vue      // 反馈页面
-        ├─ Login.vue         // 登录页面
-        ├─ Register.vue      // 注册页面
-        ├─ Speaker.vue       // 演讲者页面
-        └─ Student.vue       // 学生页面
+    
+    └─ views/                # 页面级组件目录
+    
+        ├─ AddCourse.vue     # 添加课程页面
+        
+        ├─ Admin.vue         # 管理员页面
+        
+        ├─ Ans.vue           # 答案页面
+        
+        ├─ ansinf.vue        # 答案信息页面
+        
+        ├─ CourseList.vue    # 课程列表页面
+        
+        ├─ Discussion.vue    # 讨论区页面
+        
+        ├─ Feedback.vue      # 反馈页面
+        
+        ├─ Login.vue         # 登录页面
+        
+        ├─ Register.vue      # 注册页面
+        
+        ├─ Speaker.vue       # 演讲者页面
+        
+        └─ Student.vue       # 学生页面
 ## 后端结构表
 pqbackmain/
 │
