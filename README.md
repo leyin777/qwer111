@@ -109,6 +109,20 @@ pqbackmain
 
 │ │ └─ mapper/ # MyBatis 映射文件（SQL 语句）
 
+## 前端部署
+使用VS CODE打开pqfront文件夹，在终端运行下面三条语句完成相关配置（要以管理员身份打开），安装好后重启软件即可
+1. 安装 Vue 3 相关依赖
+npm install vue@next vue-router@4
+
+2. 安装 Element Plus（UI 组件库）
+npm install element-plus
+
+3. 安装 Axios（HTTP 请求库）
+npm install axios
+
+## 后端部署
+使用IDEA打开pqbackmain文件夹，等待相关依赖下载即可（采用java17，若有报错请检查Java版本）
+
 ## 数据库部署
 使用navicat创建一个名为108pq的mysql数据库，然后运行108pq.sql文件，即部署完成。不使用navicat图形界面，直接使用mysql命令也可以。
 
