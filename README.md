@@ -212,7 +212,5 @@ docker镜像已经部署到服务器上，路径为http://159.75.90.202:8000/aip
 
 <img width="536" height="255" alt="image" src="https://github.com/user-attachments/assets/51f82c3a-9624-4560-bde2-5f0475ad471c" />
 
-运行说明：
-pqfront在vscode中允许，pqbackmain在IDEA中运行，数据库中有部分数据可以完成部分功能
 
 
